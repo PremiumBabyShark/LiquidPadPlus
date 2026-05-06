@@ -1,0 +1,67 @@
+
+---
+
+## File 3: `.gitignore`
+
+📍 Location: `LiquidPad/.gitignore`
+
+```gitignore
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+installer/
+*.spec
+build,bat
+installer.iss
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Screenshots (keep folder, ignore files)
+assets/screenshots/*.png
+!assets/screenshots/.gitkeep
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
