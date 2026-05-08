@@ -1,6 +1,6 @@
 """
 Theme definitions for LiquidPadPlus.
-Modern, editorial-inspired color palettes.
+Modern, editorial-inspired color palettes with high contrast status text.
 """
 
 THEMES = {
@@ -14,16 +14,17 @@ THEMES = {
         "select_bg": "#2d2d3a",
         "accent": "#1a1a24",
         "accent_hover": "#222230",
-        "accent_active": "#2a2a3a",
+        "accent_active": "#8888aa",
         "border": "#1e1e2a",
         "tab_active": "#252535",
         "tab_inactive": "#1a1a24",
         "status_bg": "#0a0a10",
         "gradient_start": "#c4a7e7",
         "gradient_end": "#7aa2f7",
-        "sidebar_bg": "#0d0d16"
+        "sidebar_bg": "#0d0d16",
+        "slider_trough": "#2a2a3a",
+        "slider_puck": "#c4a7e7"
     },
-    
     "graphite": {
         "name": "⬛ Graphite",
         "glass_effect": False,
@@ -34,16 +35,17 @@ THEMES = {
         "select_bg": "#3a3a48",
         "accent": "#262630",
         "accent_hover": "#2e2e3a",
-        "accent_active": "#363644",
+        "accent_active": "#888899",
         "border": "#2a2a36",
         "tab_active": "#303040",
         "tab_inactive": "#262630",
         "status_bg": "#16161e",
         "gradient_start": "#fca5a5",
         "gradient_end": "#f9a8d4",
-        "sidebar_bg": "#14141a"
+        "sidebar_bg": "#14141a",
+        "slider_trough": "#323242",
+        "slider_puck": "#fca5a5"
     },
-    
     "paper": {
         "name": "📄 Paper",
         "glass_effect": False,
@@ -54,16 +56,17 @@ THEMES = {
         "select_bg": "#e8e0d0",
         "accent": "#ede8e0",
         "accent_hover": "#e5dfd5",
-        "accent_active": "#ddd6ca",
+        "accent_active": "#999080",
         "border": "#e0d8c8",
         "tab_active": "#ffffff",
         "tab_inactive": "#ede8e0",
         "status_bg": "#ebe4d8",
         "gradient_start": "#b8a080",
         "gradient_end": "#c4a7e7",
-        "sidebar_bg": "#e8e0d4"
+        "sidebar_bg": "#e8e0d4",
+        "slider_trough": "#d5ccbc",
+        "slider_puck": "#b8a080"
     },
-    
     "ocean_dark": {
         "name": "🌊 Ocean Dark",
         "glass_effect": True,
@@ -74,16 +77,17 @@ THEMES = {
         "select_bg": "#1a3550",
         "accent": "#111d30",
         "accent_hover": "#162538",
-        "accent_active": "#1b2d42",
+        "accent_active": "#7799bb",
         "border": "#162538",
         "tab_active": "#1b3050",
         "tab_inactive": "#111d30",
         "status_bg": "#060e1a",
         "gradient_start": "#7dcfff",
         "gradient_end": "#5eead4",
-        "sidebar_bg": "#081220"
+        "sidebar_bg": "#081220",
+        "slider_trough": "#1a2a40",
+        "slider_puck": "#7dcfff"
     },
-    
     "midnight": {
         "name": "🌑 Midnight",
         "glass_effect": False,
@@ -94,16 +98,17 @@ THEMES = {
         "select_bg": "#264f78",
         "accent": "#161b26",
         "accent_hover": "#1c2433",
-        "accent_active": "#212d40",
+        "accent_active": "#8899aa",
         "border": "#21262d",
         "tab_active": "#1f2a3a",
         "tab_inactive": "#161b26",
         "status_bg": "#0a0e13",
         "gradient_start": "#58a6ff",
         "gradient_end": "#3fb950",
-        "sidebar_bg": "#090d13"
+        "sidebar_bg": "#090d13",
+        "slider_trough": "#1c2433",
+        "slider_puck": "#58a6ff"
     },
-    
     "forest": {
         "name": "🌲 Forest",
         "glass_effect": False,
@@ -114,16 +119,17 @@ THEMES = {
         "select_bg": "#1f3a1f",
         "accent": "#141f14",
         "accent_hover": "#1a281a",
-        "accent_active": "#203220",
+        "accent_active": "#779977",
         "border": "#1a2a1a",
         "tab_active": "#1f301f",
         "tab_inactive": "#141f14",
         "status_bg": "#0a120a",
         "gradient_start": "#6fcf6f",
         "gradient_end": "#4ecdc4",
-        "sidebar_bg": "#0a150a"
+        "sidebar_bg": "#0a150a",
+        "slider_trough": "#1a2a1a",
+        "slider_puck": "#6fcf6f"
     },
-    
     "rose": {
         "name": "🌹 Rose",
         "glass_effect": True,
@@ -134,14 +140,16 @@ THEMES = {
         "select_bg": "#3d2035",
         "accent": "#20141e",
         "accent_hover": "#281a26",
-        "accent_active": "#30202e",
+        "accent_active": "#997788",
         "border": "#281a26",
         "tab_active": "#352030",
         "tab_inactive": "#20141e",
         "status_bg": "#120a10",
         "gradient_start": "#f0a0c0",
         "gradient_end": "#d4a0f0",
-        "sidebar_bg": "#140c12"
+        "sidebar_bg": "#140c12",
+        "slider_trough": "#2a1a28",
+        "slider_puck": "#f0a0c0"
     }
 }
 

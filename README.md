@@ -56,6 +56,6 @@ This is Fork of LiquidPad but with extra Focus on Ui and Theming, Built with Pyt
 ## 🛠️ Build from Source
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/LiquidPadPlus.git
+git clone https://github.com/PremiumBabyShark/LiquidPadPlus.git
 cd LiquidPadPlus
 python main.py

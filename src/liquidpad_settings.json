@@ -1,8 +1,10 @@
 {
-  "theme": "rose",
-  "font_family": "JetBrains Mono",
-  "font_size": 12,
+  "theme": "midnight",
+  "font_family": "Consolas",
+  "font_size": 10,
   "line_numbers": true,
   "word_wrap": true,
-  "recent_files": []
+  "recent_files": [
+    "C:/Users/hardw/Documents/TESTING.txt"
+  ]
 }
