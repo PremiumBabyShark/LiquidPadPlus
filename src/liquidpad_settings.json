@@ -1,10 +1,12 @@
 {
-  "theme": "midnight",
+  "theme": "forest",
   "font_family": "Consolas",
   "font_size": 10,
   "line_numbers": true,
   "word_wrap": true,
   "recent_files": [
     "C:/Users/hardw/Documents/TESTING.txt"
-  ]
+  ],
+  "sidebar_visible": false,
+  "last_opened_file": "C:/Users/hardw/Documents/TESTING.txt"
 }
