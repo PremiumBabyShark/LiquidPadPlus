@@ -23,7 +23,7 @@ class LiquidPad:
 
         self._set_dark_titlebar()
         self.settings = load_settings()
-        self.themes = THEMES
+        self.themes = THEMES  # Live reference
         self.current_theme_name = self.settings.get("theme", DEFAULT_THEME)
         self.current_theme = get_theme(self.current_theme_name)
         self.root.configure(bg=self.current_theme["bg"])
@@ -48,23 +48,17 @@ class LiquidPad:
         self._center_window()
         self._built = True
 
-        # Session Restore: Reopen last file if it still exists
         self._restore_session()
-
         self._bind_scroll_zoom()
         self._bind_shortcuts()
-        
-        # Ensure settings save on window close
         self.root.protocol("WM_DELETE_WINDOW", self._on_close)
 
     def _on_close(self):
-        """Save session state and exit cleanly."""
         self.settings["last_opened_file"] = self.file_path
         save_settings(self.settings)
         self.root.destroy()
 
     def _restore_session(self):
-        """Automatically reopen the last file if it still exists."""
         last_file = self.settings.get("last_opened_file")
         if last_file and os.path.exists(last_file):
             self._load_file(last_file)
@@ -152,20 +146,28 @@ class LiquidPad:
         save_settings(self.settings)
 
     def _change_theme(self, theme_name):
-        if not self._built: return
-        self.current_theme_name = theme_name
-        self.current_theme = self.themes[theme_name]
-        t = self.current_theme
-        self.root.configure(bg=t["bg"])
-        self.main_frame.configure(bg=t["bg"])
-        self.editor_frame.configure(bg=t["bg"])
-        self.accent_line.configure(bg=t["gradient_start"])
-        self.statusbar.update_theme(t)
-        self.sidebar.update_theme(t)
-        self.editor.update_theme(t)
-        self.settings["theme"] = theme_name
-        save_settings(self.settings)
-        self._safe_update()
+        try:
+            if not self._built: return
+            if theme_name not in self.themes: return
+            
+            self.current_theme_name = theme_name
+            self.current_theme = self.themes[theme_name]
+            t = self.current_theme
+            
+            self.root.configure(bg=t["bg"])
+            self.main_frame.configure(bg=t["bg"])
+            self.editor_frame.configure(bg=t["bg"])
+            self.accent_line.configure(bg=t["gradient_start"])
+            
+            self.statusbar.update_theme(t)
+            self.sidebar.update_theme(t)
+            self.editor.update_theme(t)
+            
+            self.settings["theme"] = theme_name
+            save_settings(self.settings)
+            self._safe_update()
+        except Exception as e:
+            print(f"Theme switch failed: {e}")
 
     def _safe_update(self):
         if not self._built or not self.editor: return
@@ -239,7 +241,6 @@ class LiquidPad:
                 self.file_path = None
                 self.is_modified = False
                 self._update_title()
-                # Clear session so it doesn't reopen old file on next launch
                 self.settings["last_opened_file"] = None
                 save_settings(self.settings)
         else:
@@ -260,11 +261,8 @@ class LiquidPad:
                 self.is_modified = False
                 self._update_title()
                 add_recent_file(self.settings, path)
-                
-                # Update session path
                 self.settings["last_opened_file"] = path
                 save_settings(self.settings)
-                
                 self._safe_update()
                 return
             except UnicodeDecodeError: continue

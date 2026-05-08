@@ -18,7 +18,7 @@ DEFAULTS = {
     "word_wrap": True, 
     "recent_files": [],
     "sidebar_visible": False,
-    "last_opened_file": None  # ← NEW: Remembers last opened file
+    "last_opened_file": None
 }
 PREF_FONTS = ["JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", "Courier New", "Lucida Console", "Monaco", "Menlo"]
 
@@ -54,8 +54,12 @@ def available_fonts():
 
 class SettingsPopup:
     def __init__(self, root, app):
-        self.root, self.app, self.settings, self.themes = root, app, app.settings, app.themes
+        self.root = root
+        self.app = app
+        self.settings = app.settings
+        # Reference live app themes instead of static copy
         self._popup = None
+        self._theme_cells = {}
 
     def show(self):
         if self._popup and self._popup.winfo_exists():
@@ -82,7 +86,7 @@ class SettingsPopup:
         hdr = tk.Frame(popup, bg=t["accent"], height=48)
         hdr.pack(fill=tk.X); hdr.pack_propagate(False)
         tk.Label(hdr, text="Settings", bg=t["accent"], fg=t["fg"], font=("Segoe UI", 12, "bold"), anchor=tk.W).pack(side=tk.LEFT, padx=20, pady=12)
-        tk.Label(hdr, text="", bg=t["accent"], fg=t["gradient_start"], font=("Segoe UI", 14)).pack(side=tk.RIGHT, padx=16, pady=12)
+        tk.Label(hdr, text="⚙", bg=t["accent"], fg=t["gradient_start"], font=("Segoe UI", 14)).pack(side=tk.RIGHT, padx=16, pady=12)
         tk.Frame(popup, bg=t["border"], height=1).pack(fill=tk.X)
 
         canvas = tk.Canvas(popup, bg=t["bg"], highlightthickness=0, bd=0)
@@ -98,28 +102,39 @@ class SettingsPopup:
         theme_var = tk.StringVar(value=self.app.current_theme_name)
         theme_grid = tk.Frame(inner, bg=t["bg"])
         theme_grid.pack(fill=tk.X, padx=20, pady=(4, 8))
-        for i, (key, data) in enumerate(self.themes.items()):
+        self._theme_cells = {}  # Reset tracking
+        
+        for i, (key, data) in enumerate(self.app.themes.items()):
             r, c = divmod(i, 2)
-            bg = t["accent_hover"] if key == self.app.current_theme_name else t["accent"]
+            is_sel = (key == self.app.current_theme_name)
+            bg = t["accent_hover"] if is_sel else t["accent"]
+            
             cell = tk.Frame(theme_grid, bg=bg, name=f"theme_{key}")
             cell.grid(row=r, column=c, padx=4, pady=4, sticky="ew")
             theme_grid.columnconfigure(c, weight=1)
+            
             tk.Label(cell, text="●", bg=bg, fg=data.get("gradient_start", t["gradient_start"]), font=("Segoe UI", 8)).pack(side=tk.LEFT, padx=(10, 4), pady=8)
             tk.Label(cell, text=data["name"], bg=bg, fg=t["fg"], font=("Segoe UI", 9), anchor=tk.W).pack(side=tk.LEFT, fill=tk.X, expand=True, pady=8)
-            tk.Label(cell, text="✓" if key == self.app.current_theme_name else "", bg=bg, fg=t["gradient_start"], font=("Segoe UI", 9, "bold")).pack(side=tk.RIGHT, padx=10)
+            tk.Label(cell, text="✓" if is_sel else "", bg=bg, fg=t["gradient_start"], font=("Segoe UI", 9, "bold"), name="check").pack(side=tk.RIGHT, padx=10)
 
-            def _select(e, k=key):
-                self.app._change_theme(k)
-                theme_var.set(k)
-                self._refresh_grid(theme_grid, theme_var.get(), t)
-            def _hover_in(e, cell=cell): cell.configure(bg=t["accent_hover"]); [w.configure(bg=t["accent_hover"]) for w in cell.winfo_children()]
-            def _hover_out(e, k=key, cell=cell):
-                bg2 = t["accent_hover"] if theme_var.get() == k else t["accent"]
-                cell.configure(bg=bg2); [w.configure(bg=bg2) for w in cell.winfo_children()]
+            # Store refs for efficient refresh
+            self._theme_cells[key] = {"cell": cell, "check": cell.winfo_children()[2], "name_lbl": cell.winfo_children()[1]}
+
+            # Use command= for reliability instead of bind
+            def _select(k=key):
+                try:
+                    self.app._change_theme(k)
+                    theme_var.set(k)
+                    self._refresh_grid(theme_var.get(), t)
+                except Exception as e:
+                    print(f"Theme switch error: {e}")
+
             cell.configure(cursor="hand2")
-            cell.bind("<Button-1>", _select)
-            cell.bind("<Enter>", _hover_in)
-            cell.bind("<Leave>", _hover_out)
+            cell.bind("<Button-1>", lambda e, cmd=_select: cmd())
+            # Also bind children so clicking text/icon works
+            for child in cell.winfo_children():
+                child.configure(cursor="hand2")
+                child.bind("<Button-1>", lambda e, cmd=_select: cmd())
 
         self._section_header(inner, t, "Recent Files", "")
         rec_frame = tk.Frame(inner, bg=t["bg"])
@@ -188,14 +203,15 @@ class SettingsPopup:
         cb = tk.Label(footer, text="Cancel", bg=t["accent"], fg=t["fg"], font=("Segoe UI", 9), padx=14, pady=8, cursor="hand2")
         cb.pack(side=tk.RIGHT, pady=10); cb.bind("<Button-1>", lambda e: popup.destroy()); cb.bind("<Enter>", lambda e: cb.configure(bg=t["accent_hover"])); cb.bind("<Leave>", lambda e: cb.configure(bg=t["accent"]))
 
-    def _refresh_grid(self, grid, selected, t):
-        for w in grid.winfo_children():
-            is_sel = (w.cget("name").startswith("theme_") and w.cget("name").split("_")[1] == selected)
+    def _refresh_grid(self, selected, t):
+        for key, refs in self._theme_cells.items():
+            is_sel = (key == selected)
             bg = t["accent_hover"] if is_sel else t["accent"]
-            w.configure(bg=bg)
-            for c in w.winfo_children(): c.configure(bg=bg)
-            if is_sel and len(w.winfo_children()) >= 3: w.winfo_children()[2].configure(text="✓")
-            elif not is_sel and len(w.winfo_children()) >= 3: w.winfo_children()[2].configure(text="")
+            refs["cell"].configure(bg=bg)
+            refs["check"].configure(text="✓" if is_sel else "", bg=bg)
+            refs["name_lbl"].configure(bg=bg)
+            for child in refs["cell"].winfo_children():
+                child.configure(bg=bg)
 
     def _section_header(self, parent, t, title, icon=""):
         f = tk.Frame(parent, bg=t["bg"])

@@ -1,5 +1,5 @@
 {
-  "theme": "forest",
+  "theme": "graphite",
   "font_family": "Consolas",
   "font_size": 10,
   "line_numbers": true,
@@ -7,6 +7,6 @@
   "recent_files": [
     "C:/Users/hardw/Documents/TESTING.txt"
   ],
-  "sidebar_visible": false,
+  "sidebar_visible": true,
   "last_opened_file": "C:/Users/hardw/Documents/TESTING.txt"
 }
