@@ -4,7 +4,7 @@
 
 This is Fork of LiquidPad but with extra Focus on Ui and Theming, Built with Python + Tkinter. Features glass morphism, 8 themes, line numbers, and settings persistence — all in a lightweight ~20MB package.
 
-![LiquidPadPlus](assets/Screenshots/Screenshot2.png)
+![LiquidPadPlus](assets/screenshots/Screenshot2.png)
 
 ---
 
