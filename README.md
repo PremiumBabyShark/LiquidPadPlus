@@ -1,8 +1,8 @@
 # 💧 LiquidPadPlus
 
-**A fast, beautiful, transparent notepad for Windows.** 
+**A fast, beautiful, transparent notepad for Windows.**
 
-This is Fork of LiquidPad but with extra Focus on Ui and Theming, Built with Python + Tkinter. Features glass morphism, 8 themes, line numbers, and settings persistence — all in a lightweight ~20MB package.
+LiquidPadPlus is a fork of [LiquidPad](https://github.com/PremiumBabyShark/LiquidPad) focused on enhanced UI, theming, and professional editing features. Built with Python + Tkinter. Zero dependencies.
 
 ![LiquidPadPlus](assets/screenshots/Screenshot2.png)
 
@@ -10,51 +10,92 @@ This is Fork of LiquidPad but with extra Focus on Ui and Theming, Built with Pyt
 
 ## ✨ Features
 
-- 🪟 **Transparency Control** — Adjustable window opacity
-- 💎 **Glass Morphism** — Frosted glass effects
-- 🎨 **8 Themes** — Onyx, Graphite, Paper, Ocean Dark, Midnight, Forest, Rose, Mac Dark
-- 📝 **Line Numbers** — Optional gutter with line count
-- 🔍 **Find & Replace** — Quick search with highlights
-- 🔤 **Font Picker** — Choose from installed monospace fonts
-- ⚙️ **Settings Persistence** — JSON-based, remembers everything
-- 📂 **Recent Files** — Quick access to last 5 files
+- ☰ **Retractable Sidebar** — Press TAB or click ☰ in status bar to toggle
+- 💾 **Session Restore** — Automatically reopens your last file
+- 🏷️ **Modified Indicator** — Shows when file has unsaved changes
+- 📍 **Live Cursor Position** — Line and column display in status bar
+- 🪟 **Transparency Control** — Adjustable window opacity (30%–100%)
+- 💎 **Glass Morphism** — Frosted glass effects on select themes
+- 🎨 **7 Themes** — Onyx, Graphite, Paper, Ocean Dark, Midnight, Forest, Rose
+- 📝 **Line Numbers** — Dynamic gutter with auto-expanding width
+- 🔍 **Find & Replace** — Smart search with contrast-safe highlights
+- 🎛️ **macOS-style Settings** — Animated toggle switches
+- 🔤 **Font Picker** — Choose from all installed monospace fonts
+- ⚙️ **Settings Persistence** — JSON-based, remembers everything between sessions
+- 📂 **Recent Files** — Quick access to last 5 opened files
+- 💬 **Tooltips** — Hover over status bar items for help
 - 📌 **Always on Top** — Pin above other windows
-- ⚡ **<1 second startup** — Optimized for speed
-- 📦 **~20MB RAM** — Stays out of your way
+- 🌙 **Dark Title Bar** — Native Windows dark mode title bar
+- ⚡ **Instant Startup** — Optimized for speed
+- 📦 **~20MB RAM** — Lightweight and efficient
 
 ---
 
-## ⌨️ Shortcuts
+## ⌨️ Keyboard Shortcuts
 
-| Key | Action |
-|-----|--------|
+| Shortcut | Action |
+|----------|--------|
+| `TAB` | Toggle sidebar |
+| `Ctrl+N` | New file |
 | `Ctrl+O` | Open file |
 | `Ctrl+S` | Save |
 | `Ctrl+Shift+S` | Save As |
 | `Ctrl+F` | Find & Replace |
+| `Ctrl+Z` | Undo |
+| `Ctrl+Y` | Redo |
+| `Ctrl+X/C/V` | Cut/Copy/Paste |
+| `Ctrl+A` | Select All |
 | `Ctrl+Q` | Exit |
 | `Ctrl+Scroll` | Zoom text |
-| `Ctrl+A` | Select all |
 
 ---
 
 ## 🎨 Themes
 
-| Theme | Style |
-|-------|-------|
-| 🖤 Onyx | Dark glass |
-| ⬛ Graphite | Solid dark |
-| 📄 Paper | Warm light |
-| 🌊 Ocean Dark | Blue glass |
-| 🌑 Midnight | GitHub dark |
-| 🌲 Forest | Green dark |
-| 🌹 Rose | Pink glass |
-| 🍎 Mac Dark | macOS-inspired |
+| Theme | Style | Glass Effect |
+|-------|-------|:---:|
+| 🖤 Onyx | Dark glass | ✅ |
+| ⬛ Graphite | Solid dark | ❌ |
+| 📄 Paper | Warm light | ❌ |
+| 🌊 Ocean Dark | Blue glass | ✅ |
+| 🌑 Midnight | GitHub dark | ❌ |
+| 🌲 Forest | Green dark | ❌ |
+| 🌹 Rose | Pink glass | ✅ |
 
 ---
 
-## 🛠️ Build from Source
+## 📈 Stats
+⭐ 157+ unique cloners in first two weeks
 
+👁️ 350+ total clones
+
+🔴 Featured on Reddit
+
+---
+
+## 🙏 Credits
+Original LiquidPad
+
+Fork by PremiumBabyShark
+
+Built with Python + Tkinter
+
+---
+
+## 📄 License
+MIT — free for personal and commercial use.
+
+---
+
+## 🚀 Installation
+
+### Windows Installer (Recommended)
+Download the latest setup from [Releases](https://github.com/PremiumBabyShark/LiquidPadPlus/releases/latest).
+
+### Portable Version
+Download `LiquidPadPlus_v1.2.zip` from [Releases](https://github.com/PremiumBabyShark/LiquidPadPlus/releases/latest) and extract anywhere.
+
+### Run from Source
 ```bash
 git clone https://github.com/PremiumBabyShark/LiquidPadPlus.git
 cd LiquidPadPlus
